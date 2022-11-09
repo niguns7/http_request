@@ -7,8 +7,12 @@ import './Blog.css';
 
 class Blog extends Component {
     //seting the state which we have manipulated after fetching to the api
+    //initially selected post id is null which is passed to fullpost 
+    //then we have updated thw state to id that is passes as a argumwnt
+    //and at fullpost if the id isnt null it will execte
     state = {
-        posts: []
+        posts: [],
+        SelectedPostId: null
     }
 
     componentDidMount () {
@@ -28,13 +32,19 @@ class Blog extends Component {
             //console.log(Response)
         });
     }
+
+    ClickedHandler = (id) => {
+        this.setState({SelectedPostId: id});
+    }
+
     render () {
 
         const posts = this.state.posts.map(post => {
             return <Post 
             key={post.id }
             title={post.title}
-            author={post.author}/> 
+            author={post.author}
+            clicekd={() => this.ClickedHandler(post.id)}/> 
             //passing the title to the title and we have diffrent unique key on our api..
             
         });
@@ -44,8 +54,9 @@ class Blog extends Component {
                 <section className="Posts">
                     {posts}
                 </section>
-                <section>
-                    <FullPost />
+        
+                <section>         
+                    <FullPost id= {this.state.SelectedPostId} />
                 </section>
                 <section>
                     <NewPost />
@@ -56,3 +67,5 @@ class Blog extends Component {
 }
 
 export default Blog;
+
+//passing id to the fullpost component 

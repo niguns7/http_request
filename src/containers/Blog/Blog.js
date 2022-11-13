@@ -15,6 +15,7 @@ class Blog extends Component {
         SelectedPostId: null
     }
 
+    
     componentDidMount () {
         axios.get('https://jsonplaceholder.typicode.com/posts')
         //getting data from our backend

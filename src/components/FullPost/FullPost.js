@@ -8,12 +8,15 @@ class FullPost extends Component {
     }
     componentDidUpdate () {
         if (this.props.id) {
-            axios.get ("https://jsonplaceholder.typicode.com/posts/1" + this.props.id)          
+            if (!this.state.lodedPost || (this.state.lodedPost && this.state.lodedPost.id ===! this.props.id)) {
+                axios.get ("https://jsonplaceholder.typicode.com/posts/1" + this.props.id)          
         
-        .then(Response => {
-            //console.log(Response);
-            this.setState ({lodedpost : Response.data});
-        });
+                .then(Response => {
+                    //console.log(Response);
+                    this.setState ({lodedpost : Response.data});
+                });
+            }
+
     }
     }
     render () {
@@ -25,7 +28,7 @@ class FullPost extends Component {
             post = (
                 <div className="FullPost">
                     <h1>{this.state.lodedPost.title}</h1>
-                    <p>{this.state.lodedPost.body}</p>
+                    <p>{this.state.lodedPost.content}</p>
                     <div className="Edit">
                         <button className="Delete">Delete</button>
                     </div>
@@ -33,7 +36,7 @@ class FullPost extends Component {
     
             );
 
-        };
+        }
 
         return post;
     }

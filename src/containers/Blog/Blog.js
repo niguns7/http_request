@@ -12,7 +12,7 @@ class Blog extends Component {
     //and at fullpost if the id isnt null it will execte
     state = {
         posts: [],
-        SelectedPostId: null
+        selectedPostId: null,
     }
 
     
@@ -34,8 +34,8 @@ class Blog extends Component {
         });
     }
 
-    ClickedHandler = (id) => {
-        this.setState({SelectedPostId: id});
+    postSelectedHandler = (id) => {
+        this.setState({selectedPostId: id});
     }
 
     render () {
@@ -45,7 +45,7 @@ class Blog extends Component {
             key={post.id }
             title={post.title}
             author={post.author}
-            clicekd={() => this.ClickedHandler(post.id)}/> 
+            clicked={() => this.postSelectedHandler(post.id)}/> 
             //passing the title to the title and we have diffrent unique key on our api..
             
         });
@@ -57,7 +57,7 @@ class Blog extends Component {
                 </section>
         
                 <section>         
-                    <FullPost id= {this.state.SelectedPostId} />
+                    <FullPost id= {this.state.selectedPostId} />
                 </section>
                 <section>
                     <NewPost />
